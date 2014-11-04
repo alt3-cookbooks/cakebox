@@ -30,12 +30,8 @@ end
 template "Nginx: default site configuration" do
   path "/etc/nginx/sites-available/default"
   source "nginx-default.erb"
-  variables(
-    :hostname => node['hostname']
-  )
   notifies :reload, "service[nginx]", :immediately
 end
-
 
 # FriendsOfCake: app-template uses /var/log/app for file based caching
 # and expects the directory to be present.
