@@ -30,3 +30,7 @@ This cookbook is test-kitchen tested against the following platforms:
 4. Commit your changes (`git commit -am 'Adds some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create a new Pull Request
+
+# TODO
+
+- remove ~/install.sh (used by chef)
