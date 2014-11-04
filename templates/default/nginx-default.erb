@@ -1,0 +1,19 @@
+server {
+  listen 80;
+  server_name <%= @hostname %>;
+  root /var/www;
+
+  index index.html index.htm;
+
+  location / {
+    try_files $uri $uri/ / =404;
+  }
+
+  # Deny access to .htaccess & .htpasswd files
+  location ~ /\.ht {
+    deny all;
+  }
+
+  access_log /var/log/nginx/<%= @hostname %>.access.log;
+  error_log  /var/log/nginx/<%= @hostname %>.error.log error;
+}
