@@ -1,6 +1,24 @@
 # Exit on Windows platforms
 return if node['platform'] == 'windows'
 
+# Cakebox: pre-create /var/home/vagrant/Apps with 0777 to prevent Synced Folders
+# mounted to a subfolder will create the folder itself using too restrictive
+# permissions.
+directory "Cakebox: Apps" do
+  path node['cakebox']['apps_dir']
+  owner 'vagrant'
+  group 'vagrant'
+  mode '0777'
+  action :create
+end
+
+# Cakebox: clean up system by removing all files specified in atrributes
+node['cakebox']['remove_files'].each do |filepath|
+  file filepath do
+    action :delete
+  end
+end
+
 # Nginx: define cb service so we can use it to reload
 service "nginx" do
   supports :status => true, :restart => true, :reload => true
