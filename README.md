@@ -35,7 +35,6 @@ This cookbook is test-kitchen tested against the following platforms:
 
 - new: use Cake theme for default site
 - bug: disable motd login message
-- new: add ASCII login logo
-
+- new: add ASCII login logo, maybe add custom information: ip-addresses, databases, websites
 
 #               !!!!  UPLOAD CAKEBOX.BOX  !!!!
