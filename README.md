@@ -33,4 +33,9 @@ This cookbook is test-kitchen tested against the following platforms:
 
 # TODO
 
-- remove ~/install.sh (used by chef)
+- new: use Cake theme for default site
+- bug: disable motd login message
+- new: add ASCII login logo
+
+
+#               !!!!  UPLOAD CAKEBOX.BOX  !!!!
