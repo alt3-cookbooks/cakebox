@@ -33,8 +33,10 @@ This cookbook is test-kitchen tested against the following platforms:
 
 # TODO
 
+- bug: add vagrant to /var/log/nginx
 - new: use Cake theme for default site
 - bug: disable motd login message
 - new: add ASCII login logo, maybe add custom information: ip-addresses, databases, websites
+- add bash colouring scheme??
 
 #               !!!!  UPLOAD CAKEBOX.BOX  !!!!
