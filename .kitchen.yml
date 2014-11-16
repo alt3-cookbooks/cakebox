@@ -14,8 +14,14 @@ suites:
   - name: default
     run_list:
       - recipe[nginx::server]
+      - recipe[phpcs]
       - recipe[cakebox]
 
     attributes:
       nginx:
         "skip_default_site": true
+      phcs:
+        "install_method": "composer"
+        "coding_standards":
+          "Cakephp":
+              "repository": "https://github.com/cakephp/cakephp-codesniffer.git"
