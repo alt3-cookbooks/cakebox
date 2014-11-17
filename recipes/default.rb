@@ -30,9 +30,9 @@ service "nginx" do
   supports :status => true, :restart => true, :reload => true
 end
 
-# Nginx: create default site directory
+# Nginx: create  default site/catchall directory
 directory "Nginx: default site directory" do
-  path node['cakebox']['nginx']['html_target']
+  path node['cakebox']['nginx']['catchall_root']
   owner 'vagrant'
   group 'vagrant'
   mode '0777'
@@ -43,9 +43,9 @@ end
 # Nginx: copy each cbf (cookbookfile) from /files/website/ to the default site directory
 cb = run_context.cookbook_collection[cookbook_name]
 cb.manifest['files'].each do |cbf|
-  if cbf['path'].start_with?( "files/default/#{node['cakebox']['nginx']['html_source']}" )
-    cookbook_file "#{node['cakebox']['nginx']['html_target']}/#{cbf['name']}" do
-      source "#{node['cakebox']['nginx']['html_source']}/#{cbf['name']}"
+  if cbf['path'].start_with?( "files/default/#{node['cakebox']['nginx']['catchall_source']}" )
+    cookbook_file "#{node['cakebox']['nginx']['catchall_root']}/#{cbf['name']}" do
+      source "#{node['cakebox']['nginx']['catchall_source']}/#{cbf['name']}"
     end
   end
 end
@@ -54,6 +54,9 @@ end
 template "Nginx: default site configuration" do
   path "/etc/nginx/sites-available/default"
   source "nginx-default.erb"
+  variables(
+    :root => node['cakebox']['nginx']['catchall_root']
+   )
   notifies :reload, "service[nginx]", :immediately
 end
 
