@@ -14,6 +14,7 @@ suites:
   - name: default
     run_list:
       - recipe[nginx::server]
+      - recipe[php5-ppa]
       - recipe[phpcs]
       - recipe[cakebox]
 
