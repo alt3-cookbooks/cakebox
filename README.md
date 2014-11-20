@@ -1,6 +1,6 @@
 # cakebox cookbook
 
-[![Build Status](https://travis-ci.org/alt3-cookbooks/chef-cakebox.svg)](https://travis-ci.org/alt3-cookbooks/chef-cakebox)
+[![Build Status](https://travis-ci.org/alt3/chef-cakebox.svg)](https://travis-ci.org/alt3/chef-cakebox)
 
 Cookbook used for [Cakebox](https://github.com/alt3/cakebox) customizations.
 
@@ -26,7 +26,7 @@ This cookbook is test-kitchen tested against the following platforms:
 
 # Contributing
 
-1. Fork it ( https://github.com/alt3-cookbooks/chef-cakebox/fork )
+1. Fork it ( https://github.com/alt3/chef-cakebox/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Make sure test-kitchen and foodcritic tests pass
 4. Commit your changes (`git commit -am 'Adds some feature'`)
