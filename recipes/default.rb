@@ -20,12 +20,18 @@ node['cakebox']['remove_files'].each do |filepath|
 end
 
 # PHPCS: set CakePHP as the default standard globally
-execute "Set CakePHP as global CodeSniffer default" do
+execute "Make CakePHP the default PHPCS coding standard" do
   command "phpcs --config-set default_standard CakePHP"
   action :run
 end
 
-# Nginx: define cb service so we can use it to reload
+# PHPCS: show progress without -p parameter
+execute "Always show PHPCS progress" do
+    command "phpcs --config-set show_progress 1"
+    action :run
+end
+
+# Nginx: define a cookbook service for nginx so we can reload the server
 service "nginx" do
   supports :status => true, :restart => true, :reload => true
 end
