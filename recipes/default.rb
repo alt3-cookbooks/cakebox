@@ -38,7 +38,7 @@ end
 
 # Nginx: create  default site/catchall directory
 directory "Nginx: default site directory" do
-  path node['cakebox']['nginx']['catchall_root']
+  path node['cakebox']['nginx']['catchall_webroot']
   owner 'vagrant'
   group 'vagrant'
   mode '0777'
@@ -49,16 +49,15 @@ end
 # Nginx: copy each cbf (cookbookfile) from /files/website/ to the default site directory
 cb = run_context.cookbook_collection[cookbook_name]
 cb.manifest['files'].each do |cbf|
-  if cbf['path'].start_with?( "files/default/#{node['cakebox']['nginx']['catchall_source']}" )
-    cookbook_file "#{node['cakebox']['nginx']['catchall_root']}/#{cbf['name']}" do
-      source "#{node['cakebox']['nginx']['catchall_source']}/#{cbf['name']}"
-    end
+  cookbook_file "#{node['cakebox']['nginx']['catchall_webroot']}/#{cbf['name']}" do
+    source "#{node['cakebox']['nginx']['catchall_sources']}/#{cbf['name']}"
+    only_if { cbf['path'].start_with?( "files/default/#{node['cakebox']['nginx']['catchall_sources']}" ) }
   end
 end
 
 # Nginx: create and load default site configuration file
 template "Nginx: default site configuration" do
-  source node['cakebox']['nginx']['catchall_source']
+  source node['cakebox']['nginx']['default_site']
   path "/etc/nginx/sites-available/default"
   variables(
     :root => node['cakebox']['nginx']['catchall_webroot']
@@ -85,6 +84,7 @@ end
 template "MOTD: cakebox banner" do
     source node['cakebox']['motd']['banner_source']
     path "#{node['cakebox']['motd']['message_dir']}/#{node['cakebox']['motd']['banner_target']}"
+    mode '0755'
 end
 
 # MOTD: remove annoying update-notifier and other noisifying/useless messages

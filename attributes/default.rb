@@ -5,8 +5,9 @@ default['cakebox']['removable_files'] = [
   '/home/vagrant/install.sh' # Chef left-over in vagrant home
   ]
 
-# Default website
-default['cakebox']['nginx']['catchall_source'] = 'nginx-catchall.erb'
+# Default website nginx template and /files/catchall html sources
+default['cakebox']['nginx']['default_site'] = 'nginx-default-site.erb'
+default['cakebox']['nginx']['catchall_sources'] = 'catchall'
 default['cakebox']['nginx']['catchall_webroot'] = '/cakebox/catchall'
 
 # FriendsOfCake
