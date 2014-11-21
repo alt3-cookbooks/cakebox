@@ -21,7 +21,7 @@ default['cakebox']['foc']['app_template_file_cache_dir'] = '/var/log/app'
 default['cakebox']['motd']['message_dir'] = '/etc/update-motd.d'
 default['cakebox']['motd']['banner_source'] = 'motd-banner.erb'
 default['cakebox']['motd']['banner_target'] = '20-cakebox-banner'
-default['cakebox']['motd']['removable_message'] = [
+default['cakebox']['motd']['removable_messages'] = [
     '10-help-text',
     '90-updates-available'
 ]
