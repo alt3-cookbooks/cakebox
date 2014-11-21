@@ -13,7 +13,7 @@ directory "Cakebox: Apps" do
 end
 
 # Cakebox: clean up system by removing all files specified in atrributes
-node['cakebox']['remove_files'].each do |filepath|
+node['cakebox']['removable_files'].each do |filepath|
   file filepath do
     action :delete
   end
@@ -58,10 +58,10 @@ end
 
 # Nginx: create and load default site configuration file
 template "Nginx: default site configuration" do
+  source node['cakebox']['nginx']['catchall_source']
   path "/etc/nginx/sites-available/default"
-  source "nginx-default.erb"
   variables(
-    :root => node['cakebox']['nginx']['catchall_root']
+    :root => node['cakebox']['nginx']['catchall_webroot']
    )
   notifies :reload, "service[nginx]", :immediately
 end
@@ -79,4 +79,18 @@ end
 # Cake: Install acl so users can use setfacl to set permissions as described in The Book
 package 'acl' do
   action :install
+end
+
+# MOTD: create executable cakebox banner sh file
+template "MOTD: cakebox banner" do
+    source node['cakebox']['motd']['banner_source']
+    path "#{node['cakebox']['motd']['message_dir']}/#{node['cakebox']['motd']['banner_target']}"
+end
+
+# MOTD: remove annoying update-notifier and other noisifying/useless messages
+node['cakebox']['motd']['removables'].each do |removable|
+  file "MOTD: delete noise" do
+    path "#{node['cakebox']['motd']['message_dir']}/#{removable}"
+    action :delete
+  end
 end
