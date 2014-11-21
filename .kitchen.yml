@@ -14,12 +14,21 @@ suites:
   - name: default
     run_list:
       - recipe[apt]
-      - recipe[nginx::server]
+      - recipe[git-ppa]
+      - recipe[percona::server]
+      - recipe[percona::backup]
       - recipe[php5-ppa]
+      - recipe[nginx::server]
       - recipe[composer]
       - recipe[phpcs]
       - recipe[cakebox]
-
     attributes:
+      percona:
+        "server":
+          "root_password": secret
+          "bind_address": 0.0.0.0
+          "character_set": utf8
+          "collation": utf8_unicode_ci
       nginx:
+        "repository": ppa
         "skip_default_site": true
