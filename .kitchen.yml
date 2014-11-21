@@ -13,9 +13,10 @@ platforms:
 suites:
   - name: default
     run_list:
+      - recipe[apt]
       - recipe[nginx::server]
       - recipe[php5-ppa]
-      - recipe[composer]      
+      - recipe[composer]
       - recipe[phpcs]
       - recipe[cakebox]
 
