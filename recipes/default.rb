@@ -80,17 +80,23 @@ package 'acl' do
   action :install
 end
 
-# MOTD: create executable cakebox banner sh file
-template "MOTD: cakebox banner" do
-    source node['cakebox']['motd']['banner_source']
-    path "#{node['cakebox']['motd']['message_dir']}/#{node['cakebox']['motd']['banner_target']}"
-    mode '0755'
-end
-
 # MOTD: remove annoying update-notifier and other noisifying/useless messages
 node['cakebox']['motd']['removables'].each do |removable|
   file "MOTD: delete noise" do
     path "#{node['cakebox']['motd']['message_dir']}/#{removable}"
     action :delete
   end
+end
+
+# MOTD: create executable cakebox banner bash file
+template "MOTD: cakebox banner" do
+    source node['cakebox']['motd']['banner_source']
+    path "#{node['cakebox']['motd']['message_dir']}/#{node['cakebox']['motd']['banner_target']}"
+    mode '0755'
+end
+
+# MOTD: update dynamic message so it is up-to-date at initial login
+execute "MOTD: update dynamic message" do
+    command "run-parts /etc/update-motd.d/ | tee /run/motd.dynamic"
+    action :run
 end
