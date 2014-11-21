@@ -5,9 +5,9 @@ default['cakebox']['removable_files'] = [
   '/home/vagrant/install.sh' # Chef left-over in vagrant home
   ]
 
-# Grant remome Mysql access to vagrant user
-default['cakebox']['mysql']['username'] = 'vagrant'
-default['cakebox']['mysql']['password'] = 'secret'
+# Database settings
+default['cakebox']['databases']['remote_username'] = 'vagrant'
+default['cakebox']['databases']['remote_password'] = 'vagrant'
 
 # Default website nginx template and /files/catchall html sources
 default['cakebox']['nginx']['default_site'] = 'nginx-default-site.erb'

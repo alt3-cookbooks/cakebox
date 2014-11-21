@@ -19,6 +19,15 @@ node['cakebox']['removable_files'].each do |filepath|
   end
 end
 
+# MySQL: grant remote access to vagrant user
+execute "Grant vagrant user remote MySQL access" do
+    username = node['cakebox']['databases']['remote_username']
+    password = node['cakebox']['databases']['remote_password']
+    rootpass = node["percona"]["server"]["root_password"]
+    command "/usr/bin/mysql -u root -p#{rootpass} -e \"GRANT ALL PRIVILEGES ON *.* TO '#{username}'@'%' IDENTIFIED BY '#{password}' WITH GRANT OPTION;\""
+    action :run
+end
+
 # Nginx: define an nginx cookbook service so we can use it to manipulate the real service
 service "nginx" do
   supports :status => true, :restart => true, :reload => true
