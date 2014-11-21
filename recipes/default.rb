@@ -19,19 +19,7 @@ node['cakebox']['removable_files'].each do |filepath|
   end
 end
 
-# PHPCS: set CakePHP as the default standard globally
-execute "Make CakePHP the default PHPCS coding standard" do
-  command "phpcs --config-set default_standard CakePHP"
-  action :run
-end
-
-# PHPCS: show progress without -p parameter
-execute "Always show PHPCS progress" do
-    command "phpcs --config-set show_progress 1"
-    action :run
-end
-
-# Nginx: define a cookbook service for nginx so we can reload the server
+# Nginx: define an nginx cookbook service so we can use it to manipulate the real service
 service "nginx" do
   supports :status => true, :restart => true, :reload => true
 end
@@ -65,23 +53,35 @@ template "Nginx: default site configuration" do
   notifies :reload, "service[nginx]", :immediately
 end
 
-# FriendsOfCake: app-template uses /var/log/app for file based caching
-# and expects the directory to be present.
-directory "Foc: app-template file cache" do
-  path node['cakebox']['foc']['app_template_file_cache_dir']
-  owner 'vagrant'
-  group 'vagrant'
-  mode '0777'
-  action :create
+# PHPCS: set CakePHP as the default standard globally
+execute "Make CakePHP the default PHPCS coding standard" do
+    command "phpcs --config-set default_standard CakePHP"
+    action :run
 end
 
-# Cake: Install acl so users can use setfacl to set permissions as described in The Book
+# PHPCS: show progress without -p parameter
+execute "Always show PHPCS progress" do
+    command "phpcs --config-set show_progress 1"
+    action :run
+end
+
+# CakePHP: Install acl so users can use setfacl to set permissions as described in The Book
 package 'acl' do
   action :install
 end
 
+# FriendsOfCake: app-template uses /var/log/app for file based caching
+# and expects the directory to be present.
+directory "Foc: app-template file cache" do
+    path node['cakebox']['foc']['app_template_file_cache_dir']
+    owner 'vagrant'
+    group 'vagrant'
+    mode '0777'
+    action :create
+end
+
 # MOTD: remove annoying update-notifier and other noisifying/useless messages
-node['cakebox']['motd']['removables'].each do |removable|
+node['cakebox']['motd']['removable_messages'].each do |removable|
   file "MOTD: delete noise" do
     path "#{node['cakebox']['motd']['message_dir']}/#{removable}"
     action :delete
