@@ -28,11 +28,6 @@ execute "Grant vagrant user remote MySQL access" do
     action :run
 end
 
-# Nginx: define an nginx cookbook service so we can use it to manipulate the real service
-service "nginx" do
-  supports :status => true, :restart => true, :reload => true
-end
-
 # Nginx: create  default site/catchall directory
 directory "Nginx: default site directory" do
   path node['cakebox']['nginx']['catchall_webroot']
@@ -91,7 +86,7 @@ end
 
 # MOTD: remove annoying update-notifier and other noisifying/useless messages
 node['cakebox']['motd']['removable_messages'].each do |removable|
-  file "MOTD: delete noise" do
+  file "MOTD: delete noise #{removable}" do
     path "#{node['cakebox']['motd']['message_dir']}/#{removable}"
     action :delete
   end
