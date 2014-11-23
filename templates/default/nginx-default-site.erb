@@ -8,7 +8,7 @@ server {
     server_name _;
 
     # root directive should be global
-    root <%= @root %>/webroot;
+    root <%= @webroot %>;
     index index.php index.htm;
 
     access_log /var/log/nginx/default.access.log;

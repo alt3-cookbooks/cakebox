@@ -12,7 +12,7 @@ default['cakebox']['databases']['remote_password'] = 'vagrant'
 # Default website nginx template and /files/catchall html sources
 default['cakebox']['nginx']['default_site'] = 'nginx-default-site.erb'
 default['cakebox']['nginx']['catchall_sources'] = 'catchall'
-default['cakebox']['nginx']['catchall_webroot'] = '/cakebox/catchall'
+default['cakebox']['nginx']['catchall_webroot'] = '/cakebox/console/webroot'
 
 # FriendsOfCake
 default['cakebox']['foc']['app_template_file_cache_dir'] = '/var/log/app'
