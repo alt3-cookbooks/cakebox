@@ -52,7 +52,8 @@ template "Nginx: default site configuration" do
   source node['cakebox']['nginx']['default_site']
   path "/etc/nginx/sites-available/default"
   variables(
-    :root => node['cakebox']['nginx']['catchall_webroot']
+    :root => node['cakebox']['nginx']['catchall_webroot'],
+    :timestamp => Time.now.strftime("%Y-%m-%d %H:%M:%S")
    )
   notifies :reload, "service[nginx]", :immediately
 end
