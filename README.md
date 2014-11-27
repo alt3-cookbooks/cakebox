@@ -6,7 +6,7 @@ Cookbook used for [Cakebox](https://github.com/alt3/cakebox) customizations.
 
 # Supported Platforms
 
-This cookbook is test-kitchen tested against the following platforms:
+This cookbook is kitchen-tested against the following platforms:
 
 - ubuntu-14.04
 
@@ -18,11 +18,18 @@ This cookbook is test-kitchen tested against the following platforms:
 
 ## cakebox::default
 
-- Installs the Cakebox catchall website
+See recipe for full details:
+
 - Creates and configures ~/Apps directory for vagrant user
 - Sets CakePHP as the default PHPCS coding standard
 - Creates /var/log/app to support FriendsOfCake [app-template](https://github.com/FriendsOfCake/app-template) file caching on Vagrant
 - Installs acl so users can use setfacl to set permissions as described in [The Book](http://book.cakephp.org/2.0/en/installation.html#permissions)
+
+# Test-kitchen
+
+	cd chef-cakebox
+	kitchen create
+	kitchen verify
 
 # Contributing
 
