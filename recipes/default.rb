@@ -31,7 +31,7 @@ end
 # SSH: eliminate password cracking by disabling username/password ssh logins
 template "SSH: eliminate password cracking" do
   source node['cakebox']['ssh']['config_source']
-  path "#{node['cakebox']['ssh']['config_target']}"
+  path node['cakebox']['ssh']['config_target']
   notifies :restart, "service[ssh]", :immediately
 end
 
