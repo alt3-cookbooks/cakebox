@@ -13,10 +13,11 @@ default['cakebox']['ssh']['config_target'] = '/etc/ssh/sshd_config'
 default['cakebox']['databases']['remote_username'] = 'vagrant'
 default['cakebox']['databases']['remote_password'] = 'vagrant'
 
-# Default website nginx template and /files/catchall html sources
+# Nginx: default site template, SSL certificates and test-kitchen catchall html
 default['cakebox']['nginx']['default_site'] = 'nginx-default-site.erb'
 default['cakebox']['nginx']['catchall_sources'] = 'catchall'
 default['cakebox']['nginx']['catchall_webroot'] = '/cakebox/console/webroot'
+default['cakebox']['nginx']['certs_dir'] = '/etc/nginx/ssl'
 
 # FriendsOfCake
 default['cakebox']['foc']['app_template_file_cache_dir'] = '/var/log/app'

@@ -20,6 +20,8 @@ This cookbook is kitchen-tested against the following platforms:
 
 See recipe for full details:
 
+- Configures SSL/https for catchall website
+- Disables SSH username/password logins
 - Creates and configures ~/Apps directory for vagrant user
 - Sets CakePHP as the default PHPCS coding standard
 - Creates /var/log/app to support FriendsOfCake [app-template](https://github.com/FriendsOfCake/app-template) file caching on Vagrant

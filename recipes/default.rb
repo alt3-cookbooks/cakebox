@@ -63,6 +63,22 @@ cb.manifest['files'].each do |cbf|
   end
 end
 
+# Nginx: create SSL certificates directory
+directory "Nginx: SSL certificates directory" do
+  path node['cakebox']['nginx']['certs_dir']
+  recursive true
+  action :create
+end
+
+# Nginx: copy cakebox SSL certificate files to /etc/nginx/ssl
+cb = run_context.cookbook_collection[cookbook_name]
+cb.manifest['files'].each do |cbf|
+  cookbook_file "#{node['cakebox']['nginx']['certs_dir']}/#{cbf['name']}" do
+    source "ssl-certs/#{cbf['name']}"
+    only_if { cbf['path'].start_with?( "files/default/ssl-certs" ) }
+  end
+end
+
 # Nginx: create and load default site configuration file
 template "Nginx: default site configuration" do
   source node['cakebox']['nginx']['default_site']
