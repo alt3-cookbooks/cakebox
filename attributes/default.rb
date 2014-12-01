@@ -5,6 +5,10 @@ default['cakebox']['removable_files'] = [
   '/home/vagrant/install.sh' # Chef left-over in vagrant home
   ]
 
+# SSH
+default['cakebox']['ssh']['config_source'] = 'sshd_config.erb'
+default['cakebox']['ssh']['config_target'] = '/etc/ssh/sshd_config'
+
 # Database settings
 default['cakebox']['databases']['remote_username'] = 'vagrant'
 default['cakebox']['databases']['remote_password'] = 'vagrant'

@@ -19,6 +19,22 @@ node['cakebox']['removable_files'].each do |filepath|
   end
 end
 
+# SSH: define a Chef service so we can use that to manipulate the "real" service
+# => using custom/non-standard restart command due to Ububntu 14.04/Chef bug (see
+# https://tickets.opscode.com/browse/COOK-3910)
+service "ssh" do
+  start_command "service ssh start"
+  restart_command "service ssh restart"
+  supports :restart => true
+end
+
+# SSH: eliminate password cracking by disabling username/password ssh logins
+template "SSH: eliminate password cracking" do
+  source node['cakebox']['ssh']['config_source']
+  path "#{node['cakebox']['ssh']['config_target']}"
+  notifies :restart, "service[ssh]", :immediately
+end
+
 # MySQL: grant remote access to vagrant user
 execute "Grant vagrant user remote MySQL access" do
     username = node['cakebox']['databases']['remote_username']
