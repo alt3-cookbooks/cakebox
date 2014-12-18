@@ -137,3 +137,9 @@ execute "MOTD: update dynamic message" do
     command "run-parts /etc/update-motd.d/ | tee /run/motd.dynamic"
     action :run
 end
+
+# SUDOERS: allow user root access to vagrant user's SSH Agent Forwarded identity keys
+template "SUDOERS: ssh auth socket access" do
+  source node['cakebox']['sudoers']['source']
+  path node['cakebox']['sudoers']['target']
+end

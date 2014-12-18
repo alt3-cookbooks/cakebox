@@ -5,7 +5,7 @@ DEPENDENCIES
     metadata: true
   composer
     git: https://github.com/Morphodo/chef-composer.git
-    revision: 27cb886029fc28e08ca80ab0b15408b412bb09b7
+    revision: 92aee6313fc47dfd51b45c176b7efe41c767c57d
   git-ppa
     git: https://github.com/alt3/chef-git-ppa.git
     revision: 9595bf8ab1d66a7b08d4caae0e788b48b6025b31
@@ -14,13 +14,13 @@ DEPENDENCIES
     revision: 3aefd5f582501fda991785a4eb6c81314497556a
   percona
     git: https://github.com/phlipper/chef-percona.git
-    revision: 9217d3fd30f49637b17294af8cc2afa3ee44c026
+    revision: 96ffa468ce5787e6de8782dbc24c7c658d474acb
   php5-ppa
     git: https://github.com/alt3/chef-php5-ppa.git
     revision: 3752532f84d24f64796b56f9b2ffac0fbe429931
   phpcs
     git: https://github.com/alt3/chef-phpcs
-    revision: 64157206d847b79bd86f2a75fbcc100758828142
+    revision: e4c434293047e2e1dc22b8dd7ee3a220b89ba6a7
 
 GRAPH
   apt (2.6.0)
@@ -51,6 +51,6 @@ GRAPH
     apt (>= 0.0.0)
   phpcs (1.0.0)
     composer (>= 0.0.0)
-  yum (3.4.1)
-  yum-epel (0.5.2)
+  yum (3.5.1)
+  yum-epel (0.5.3)
     yum (~> 3.0)

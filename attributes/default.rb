@@ -30,3 +30,7 @@ default['cakebox']['motd']['removable_messages'] = [
     '10-help-text',
     '90-updates-available'
 ]
+
+# Sudoers file
+default['cakebox']['sudoers']['source'] = 'sudoers.erb'
+default['cakebox']['sudoers']['target'] = '/etc/sudoers'
