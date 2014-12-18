@@ -24,6 +24,7 @@ suites:
       - recipe[cakebox]
     attributes:
       percona:
+        "keyserver": pool.sks-keyservers.net
         "server":
           "root_password": secret
           "bind_address": 0.0.0.0
