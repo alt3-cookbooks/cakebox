@@ -143,3 +143,8 @@ template "SUDOERS: ssh auth socket access" do
   source node['cakebox']['sudoers']['source']
   path node['cakebox']['sudoers']['target']
 end
+
+# KNOWN HOSTS
+node['cakebox']['ssh']['known_hosts'].each do |host|
+  ssh_known_hosts_entry host
+end

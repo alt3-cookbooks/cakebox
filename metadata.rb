@@ -6,6 +6,7 @@ version          '1.0.0'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 
 depends  "apt"
+depends  "ssh_known_hosts"
 depends  "git-ppa"
 depends  "percona"
 depends  "php5-ppa"

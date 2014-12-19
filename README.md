@@ -10,9 +10,10 @@ This cookbook is kitchen-tested against the following platforms:
 
 - ubuntu-14.04
 
-# Depends
+# Specifications
 
-- phplipper [chef-nginx](https://github.com/phlipper/chef-nginx) cookbook
+- **Attributes**: see [attributes/default.rb](https://github.com/alt3/chef-cakebox/blob/master/attributes/default.rb)
+- **Dependencies**: see [Berksfile](https://github.com/alt3/chef-cakebox/blob/master/Berksfile)
 
 # Recipes
 
@@ -22,6 +23,7 @@ See recipe for full details:
 
 - Configures SSL/https for catchall website
 - Disables SSH username/password logins
+- Pre-configures known_hosts
 - Creates and configures ~/Apps directory for vagrant user
 - Sets CakePHP as the default PHPCS coding standard
 - Creates /var/log/app to support FriendsOfCake [app-template](https://github.com/FriendsOfCake/app-template) file caching on Vagrant

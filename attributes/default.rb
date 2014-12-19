@@ -8,6 +8,10 @@ default['cakebox']['removable_files'] = [
 # SSH
 default['cakebox']['ssh']['config_source'] = 'sshd_config.erb'
 default['cakebox']['ssh']['config_target'] = '/etc/ssh/sshd_config'
+default['cakebox']['ssh']['known_hosts'] = [
+  'github.com',
+  'heroku.com'
+]
 
 # Database settings
 default['cakebox']['databases']['remote_username'] = 'vagrant'
