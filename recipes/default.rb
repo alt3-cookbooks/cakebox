@@ -87,7 +87,31 @@ template "Nginx: default site configuration" do
     :webroot => node['cakebox']['nginx']['catchall_webroot'],
     :timestamp => Time.now.strftime("%Y-%m-%d %H:%M:%S")
    )
-  notifies :reload, "service[nginx]", :immediately
+end
+
+# Nginx: make custom log_format "logstash" globally available
+template "Nginx: custom Logstash log format" do
+  source node['cakebox']['nginx']['conf_source']
+  path node['cakebox']['nginx']['conf_target']
+  notifies :reload, "service[nginx]"
+end
+
+# Logstash: add nginx pattern
+template "Logstash: nginx pattern" do
+  source node['cakebox']['logstash']['pattern_nginx_source']
+  path node['cakebox']['logstash']['pattern_nginx_target']
+end
+
+# Logstash: add nginx config
+template "Logstash: nginx config" do
+  source node['cakebox']['logstash']['config_nginx_source']
+  path node['cakebox']['logstash']['config_nginx_target']
+end
+
+# Kibana: replace cookbook generated config with default distributed config.yml
+template "Kibana: default config" do
+  source node['cakebox']['kibana']['config_source']
+  path node['cakebox']['kibana']['config_target']
 end
 
 # PHPCS: set CakePHP as the default standard globally

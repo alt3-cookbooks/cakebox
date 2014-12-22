@@ -22,6 +22,18 @@ default['cakebox']['nginx']['default_site'] = 'nginx-default-site.erb'
 default['cakebox']['nginx']['catchall_sources'] = 'catchall'
 default['cakebox']['nginx']['catchall_webroot'] = '/cakebox/console/webroot'
 default['cakebox']['nginx']['certs_dir'] = '/etc/nginx/ssl'
+default['cakebox']['nginx']['conf_source'] = 'nginx.conf.erb'
+default['cakebox']['nginx']['conf_target'] = '/etc/nginx/nginx.conf'
+
+# Logstash
+default['cakebox']['logstash']['pattern_nginx_source'] = 'logstash_pattern_nginx.erb'
+default['cakebox']['logstash']['pattern_nginx_target'] = '/opt/logstash/server/patterns/nginx'
+default['cakebox']['logstash']['config_nginx_source'] = 'logstash_config_nginx.erb'
+default['cakebox']['logstash']['config_nginx_target'] = '/opt/logstash/server/etc/conf.d/nginx.conf'
+
+# Kibana
+default['cakebox']['kibana']['config_source'] = 'kibana.yml.erb'
+default['cakebox']['kibana']['config_target'] = '/opt/kibana/current/config/kibana.yml'
 
 # FriendsOfCake
 default['cakebox']['foc']['app_template_file_cache_dir'] = '/var/log/app'
