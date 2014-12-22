@@ -96,6 +96,20 @@ template "Nginx: custom Logstash log format" do
   notifies :reload, "service[nginx]"
 end
 
+# Logstash: add logstash user to adm group so it can access /var/log directories
+group "adm" do
+  action :modify
+  members "logstash"
+  append true
+end
+
+# Logstash: standardize /var/log directory permissions to use owner::adm
+node['cakebox']['logstash']['logdir_owners'].each do | dir, owner |
+  execute "Logstash: standardize log directory permissions for #{dir}" do
+      command "chown -R #{owner}:adm /var/log/#{dir}"
+  end
+end
+
 # Logstash: add nginx pattern
 template "Logstash: nginx pattern" do
   source node['cakebox']['logstash']['pattern_nginx_source']
