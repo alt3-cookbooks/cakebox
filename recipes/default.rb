@@ -96,17 +96,12 @@ template "Nginx: custom Logstash log format" do
   notifies :reload, "service[nginx]"
 end
 
-# Logstash: add logstash user to adm group so it can access /var/log directories
-group "adm" do
-  action :modify
-  members "logstash"
-  append true
-end
-
-# Logstash: standardize /var/log directory permissions to use owner::adm
+# Logstash: set group "logstash" on /var/log directories. Unfortunately we cannot
+# use the recommended method (using group "adm" and adding the logstash user to
+# that group) since the runit service does not respect secondary group memberships.
 node['cakebox']['logstash']['logdir_owners'].each do | dir, owner |
   execute "Logstash: standardize log directory permissions for #{dir}" do
-      command "chown -R #{owner}:adm /var/log/#{dir}"
+      command "chown -R #{owner}:logstash /var/log/#{dir}"
   end
 end
 
