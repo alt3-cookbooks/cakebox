@@ -100,8 +100,15 @@ end
 # use the recommended method (using group "adm" and adding the logstash user to
 # that group) since the runit service does not respect secondary group memberships.
 node['cakebox']['logstash']['logdir_owners'].each do | dir, owner |
-  execute "Logstash: standardize log directory permissions for #{dir}" do
+  execute "Logstash: reset existing log file permissions for #{dir}" do
       command "chown -R #{owner}:logstash /var/log/#{dir}"
+  end
+end
+
+# Logstash: set group sticky bit so new files will inherit the logstash group
+node['cakebox']['logstash']['logdir_owners'].each do | dir, owner |
+  execute "Logstash: setting sticky group for #{dir}" do
+    command "chmod g+s /var/log/#{dir}"
   end
 end
 
