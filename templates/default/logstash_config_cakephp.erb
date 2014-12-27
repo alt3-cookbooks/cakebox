@@ -1,0 +1,14 @@
+input {
+	file {
+		path => "/var/log/cakephp/*.log"
+		codec => "json"
+	}
+}
+
+output {
+	elasticsearch {
+		host => "localhost"
+		protocol => "http"
+	}
+	stdout { codec => rubydebug }
+}
