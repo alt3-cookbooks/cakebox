@@ -17,14 +17,21 @@ suites:
       - recipe[git-ppa]
       - recipe[percona::server]
       - recipe[percona::backup]
+      - recipe[postgresql::server]
       - recipe[php5-ppa]
+      - recipe[nginx]
       - recipe[nginx::server]
+      - recipe[redis::server]
       - recipe[composer]
       - recipe[phpcs]
+      - recipe[java]
+      - recipe[runit]
+      - recipe[logstash::server]
+      - recipe[kibana_lwrp::install]
       - recipe[cakebox]
     attributes:
       percona:
-        "keyserver": pool.sks-keyservers.net
+        "apt_keyserver": "pool.sks-keyservers.net"
         "server":
           "root_password": secret
           "bind_address": 0.0.0.0
