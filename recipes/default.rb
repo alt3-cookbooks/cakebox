@@ -96,6 +96,14 @@ template "Nginx: custom Logstash log format" do
   notifies :reload, "service[nginx]"
 end
 
+# Logstash: create /var/log/cakephp for Logstash forwarded CakePHP application logs
+directory "Logstash: central CakePHP logs" do
+  path node['cakebox']['logstash']['cakephp_logdir']
+  group 'logstash'
+  mode '0777'
+  action :create
+end
+
 # Logstash: set group "logstash" on /var/log directories. Unfortunately we cannot
 # use the recommended method (using group "adm" and adding the logstash user to
 # that group) since the runit service does not respect secondary group memberships.
