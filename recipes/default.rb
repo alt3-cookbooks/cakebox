@@ -132,6 +132,12 @@ template "Logstash: nginx config" do
   path node['cakebox']['logstash']['config_nginx_target']
 end
 
+# Logstash: add cakephp config
+template "Logstash: cakephp config" do
+  source node['cakebox']['logstash']['config_cakephp_source']
+  path node['cakebox']['logstash']['config_cakephp_target']
+end
+
 # Kibana: replace cookbook generated config with default distributed config.yml
 template "Kibana: default config" do
   source node['cakebox']['kibana']['config_source']
