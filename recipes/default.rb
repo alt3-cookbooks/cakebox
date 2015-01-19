@@ -192,10 +192,17 @@ execute "MOTD: update dynamic message" do
     action :run
 end
 
-# SUDOERS: allow user root access to vagrant user's SSH Agent Forwarded identity keys
+# SUDO: update sudoers file to grant root user access to
+# vagrant user's SSH Agent Forwarded identity keys
 template "SUDOERS: ssh auth socket access" do
-  source node['cakebox']['sudoers']['source']
-  path node['cakebox']['sudoers']['target']
+  source node['cakebox']['sudo']['sudoers_source']
+  path node['cakebox']['sudo']['sudoers_target']
+end
+
+# SUDO: grant www-data sudo right for specific executables
+template "SUDOERS: specific grants for www-data" do
+  source node['cakebox']['sudo']['www_data_source']
+  path node['cakebox']['sudo']['www_data_target']
 end
 
 # KNOWN HOSTS

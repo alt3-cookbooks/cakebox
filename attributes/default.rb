@@ -57,6 +57,8 @@ default['cakebox']['motd']['removable_messages'] = [
   '90-updates-available'
 ]
 
-# Sudoers file
-default['cakebox']['sudoers']['source'] = 'sudoers.erb'
-default['cakebox']['sudoers']['target'] = '/etc/sudoers'
+# Sudoers file and user specific sudo files in /etc/sudoers.d
+default['cakebox']['sudo']['sudoers_source'] = 'sudoers.erb'
+default['cakebox']['sudo']['sudoers_target'] = '/etc/sudoers'
+default['cakebox']['sudo']['www_data_source'] = 'sudo_www_data.erb'
+default['cakebox']['sudo']['www_data_target'] = '/etc/sudoers.d/www-data'

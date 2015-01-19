@@ -1,0 +1,8 @@
+#
+# Grant www-data password-less access to these commands
+# so we can provision using the Cakebox Dashboard.
+#
+# Potential security issues known, placeholder solution.
+#
+
+www-data ALL=(root) NOPASSWD: /bin/mkdir, /bin/chown, /bin/mv, /bin/ln, /usr/sbin/nginx, /usr/sbin/service, /usr/bin/apt-get, /usr/bin/git, /bin/su, /bin/rm, /usr/bin/unlink
