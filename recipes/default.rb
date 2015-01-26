@@ -79,7 +79,14 @@ cb.manifest['files'].each do |cbf|
   end
 end
 
-# Nginx: create and load default site configuration file
+# Nginx: make custom log_format "logstash" globally available
+template "Nginx: custom Logstash log format" do
+  source node['cakebox']['nginx']['conf_source']
+  path node['cakebox']['nginx']['conf_target']
+  notifies :reload, "service[nginx]"
+end
+
+# Nginx: create default site configuration file
 template "Nginx: default site configuration" do
   source node['cakebox']['nginx']['default_site']
   path "/etc/nginx/sites-available/default"
@@ -89,12 +96,13 @@ template "Nginx: default site configuration" do
    )
 end
 
-# Nginx: make custom log_format "logstash" globally available
-template "Nginx: custom Logstash log format" do
-  source node['cakebox']['nginx']['conf_source']
-  path node['cakebox']['nginx']['conf_target']
-  notifies :reload, "service[nginx]"
+# Nginx: create symbolic link to enable default site
+link "Nginx: enable default site" do
+  target_file "#{node['cakebox']['nginx']['sites_enabled']}/default"
+  to "#{node['cakebox']['nginx']['sites_available']}/default"
+  action :create
 end
+
 
 # Logstash: create /var/log/cakephp for Logstash forwarded CakePHP application logs
 directory "Logstash: central CakePHP logs" do

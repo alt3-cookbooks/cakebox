@@ -24,6 +24,8 @@ default['cakebox']['nginx']['catchall_webroot'] = '/cakebox/console/webroot'
 default['cakebox']['nginx']['certs_dir'] = '/etc/nginx/ssl'
 default['cakebox']['nginx']['conf_source'] = 'nginx.conf.erb'
 default['cakebox']['nginx']['conf_target'] = '/etc/nginx/nginx.conf'
+default['cakebox']['nginx']['sites_available'] = '/etc/nginx/sites-available'
+default['cakebox']['nginx']['sites_enabled'] = '/etc/nginx/sites-enabled'
 
 # Logstash
 default['cakebox']['logstash']['pattern_nginx_source'] = 'logstash_pattern_nginx.erb'
