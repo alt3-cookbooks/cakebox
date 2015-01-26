@@ -22,11 +22,11 @@ http {
 
 	# Cakebox: logstash log format
 	log_format logstash '$http_host '
-						'$remote_addr [$time_local] '
-						'"$request" $status $body_bytes_sent '
-						'"$http_referer" "$http_user_agent" '
-						'$request_time '
-						'$upstream_response_time';
+		'$remote_addr [$time_local] '
+		'"$request" $status $body_bytes_sent '
+		'"$http_referer" "$http_user_agent" '
+		'$request_time '
+		'$upstream_response_time';
 
 	# virtual hosting
 	include /etc/nginx/sites-enabled/*;
