@@ -21,6 +21,7 @@ suites:
       - recipe[php5-ppa]
       - recipe[nginx]
       - recipe[nginx::server]
+      - recipe[hhvm]
       - recipe[redis::server]
       - recipe[composer]
       - recipe[phpcs]
